@@ -1,11 +1,18 @@
-FROM python:3.10-slim-buster
+# Use an official Python runtime as a parent image
+FROM python:3.8-slim-buster
 
-WORKDIR . .
-COPY . .
+# Set the working directory in the container to /app
+WORKDIR /app
 
-RUN apt update && apt upgrade -y
-RUN apt install git python3-pip ffmpeg -y
+# Copy the current directory contents into the container at /app
+ADD . /app
 
-RUN pip3 install -r requirements.txt
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-CMD python3 bot.py
+# Make port 80 available to the world outside this container
+EXPOSE 80
+
+# Run bot.py when the container launches
+CMD ["python", "bot.py"]
+
