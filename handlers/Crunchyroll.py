@@ -114,8 +114,7 @@ async def crunchyroll_helper_command(app: Client, message: Message):
             await message.reply_text("No valid email:password.")
 
     else:
-        await message.reply_text(
-            "Please reply with a valid combo.txt file.")
+        await message.reply_text("Please reply with a valid combo.txt file.")
 
 
 def save_results(filename, combos):
