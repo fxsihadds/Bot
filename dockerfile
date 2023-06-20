@@ -1,16 +1,11 @@
-# Use an official Python runtime as a parent image
-FROM python:3.8-slim-buster
+FROM python:3.10-slim-buster
 
+WORKDIR . .
+COPY . .
 
-WORKDIR /app
+RUN apt update && apt upgrade -y
+RUN apt install git python3-pip ffmpeg -y
 
+RUN pip3 install -r requirements.txt
 
-ADD . /app
-
-
-RUN pip install --no-cache-dir -r requirements.txt
-
-EXPOSE 80
-
-# Run bot.py when the container launches
-CMD ["python", "bot.py"]
+CMD python3 bot.py
